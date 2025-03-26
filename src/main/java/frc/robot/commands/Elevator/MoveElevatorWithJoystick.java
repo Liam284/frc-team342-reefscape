@@ -6,7 +6,7 @@ package frc.robot.commands.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
-import frc.robot.Constants.ElevatorConstants;
+import frc.robot.subsystems.Wrist;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 
@@ -14,12 +14,14 @@ import edu.wpi.first.wpilibj.XboxController;
 public class MoveElevatorWithJoystick extends Command {
   /** Creates a new MoveElevatorWithJoystick. */
   private Elevator elevator;
+  private Wrist wrist;
 
   private XboxController operator;
 
-  public MoveElevatorWithJoystick(Elevator elevator, XboxController operator) {
+  public MoveElevatorWithJoystick(Elevator elevator, Wrist wrist, XboxController operator) {
 
     this.elevator = elevator;
+    this.wrist = wrist;
     this.operator = operator;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -35,20 +37,24 @@ public class MoveElevatorWithJoystick extends Command {
   @Override
   public void execute() {
 
-    double speed = operator.getLeftY();
+    /*
+     * Elevator is slowed right now to prevent damages during testing.
+     * Still don't know if we'll let it go full speed once everything
+     * is figured out.
+     */
+    double speed;
+    speed = -MathUtil.applyDeadband(operator.getLeftY(), 0.15)/2;
+    speed = MathUtil.clamp(speed, -.3, .6);
+    //System.out.println("The joystick speed is inputting " + operator.getLeftY());
 
-    //Change the clamp values after testing
-    MathUtil.clamp(speed, -1, 1);
-
-    elevator.moveElevator(speed);
+    if(wrist.isSafe())
+      elevator.moveElevator(speed);
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    elevator.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
