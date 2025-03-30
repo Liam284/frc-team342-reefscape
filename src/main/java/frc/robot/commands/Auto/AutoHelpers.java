@@ -68,7 +68,7 @@ public class AutoHelpers {
         return Commands.sequence(
             new WristToPosition(wrist, WristPositions.TOGGLE_POSITION),
             new MoveElevatorToPosition(elevator, wrist, ElevatorHeights.LOW_POSITION_L1),
-            new WristToPosition(wrist, WristPositions.LOW_WRIST_POSITION),
+            new WristToPosition(wrist, WristPositions.LOW_WRIST_POSITION ),
             new MoveElevatorToPosition(elevator, wrist, ElevatorHeights.LOW_POSITION_L1, true).withTimeout(2)
         );
     }
