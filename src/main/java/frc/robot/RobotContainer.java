@@ -38,7 +38,9 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Commands;
 
+import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.events.Event;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
@@ -236,6 +238,14 @@ public class RobotContainer {
     reverseCoralButton = new JoystickButton(operator, XboxController.Button.kLeftStick.value);
 
     limeLighButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+
+    //Register named commands to pathplanner
+    NamedCommands.registerCommand("Elevator to Intake", goToIntake);
+    NamedCommands.registerCommand("Elevator to L2", goToL2);
+    NamedCommands.registerCommand("Elevator to L3", goToL3);
+    NamedCommands.registerCommand("Elevator to L4", goToL4);
+    NamedCommands.registerCommand("Intake Coral", intake);
+    NamedCommands.registerCommand("Score", outtake);
 
     // Autos
     autoChooser = new SendableChooser<>();
