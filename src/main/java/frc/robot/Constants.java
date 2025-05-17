@@ -45,7 +45,7 @@ public final class Constants {
     public static final double WRIST_SPEED_LIMITER = 4.0;
     public static final double WRIST_POSITION_CONVERSION = (WRIST_GEAR_RATIO) * (2 * Math.PI);
     public static final int WRIST_CURRENT_LIMIT = 30;
-    public static final double WRIST_ZERO = 0.136; //.336
+    public static final double WRIST_ZERO = 2.233; //.336
 
     // Wrist PID values; they're a list for sake of simplicity
     public static final double[] WRIST_PID_VALUES = { 0.35, 0, 0.1 };
@@ -161,10 +161,10 @@ public final class Constants {
 
     public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.77);
 
-    public static final double FL_WHEEL_DIAMETER = Units.inchesToMeters(3.886);
-    public static final double FR_WHEEL_DIAMETER = Units.inchesToMeters(3.804);
-    public static final double BL_WHEEL_DIAMETER = Units.inchesToMeters(3.808);
-    public static final double BR_WHEEL_DIAMETER = Units.inchesToMeters(3.881);
+    public static final double FL_WHEEL_DIAMETER = Units.inchesToMeters(3.849);
+    public static final double FR_WHEEL_DIAMETER = Units.inchesToMeters(3.841);
+    public static final double BL_WHEEL_DIAMETER = Units.inchesToMeters(3.801);
+    public static final double BR_WHEEL_DIAMETER = Units.inchesToMeters(3.717);
 
     public static final double WHEEL_CIRCUMFERENCE = 2 * Math.PI;
 
@@ -202,7 +202,7 @@ public final class Constants {
     // Offsets
 
     public static final double FRONT_LEFT_OFFSET = 0.81;
-    public static final double FRONT_RIGHT_OFFSET = 4.42;
+    public static final double FRONT_RIGHT_OFFSET = 4.19;
     public static final double BACK_LEFT_OFFSET = 3.09;
     public static final double BACK_RIGHT_OFFSET = 5.96;
 
@@ -231,8 +231,6 @@ public final class Constants {
 
     public static final PathConstraints SLOW_CONSTRAINTS = new PathConstraints(1,2, 6, 7);
 
-
-
   }
 
   public static class AutoConstants {
@@ -245,12 +243,12 @@ public final class Constants {
         new Pose2d(1,1,new Rotation2d(0))),  // Start : Blue 
 
       MIDDLE_APPROACH_POSE (
-        new Pose2d(1,2, new Rotation2d(0)), // Approach : Red
-        new Pose2d(1,1,new Rotation2d(0))), // Approach : Blue
+        new Pose2d(6.36, 3.864, new Rotation2d(Math.PI)), // Approach : Red
+        new Pose2d(6.305,3.875,new Rotation2d(Math.PI))), // Approach : Blue
 
       MIDDLE_SCORE_POSE (
-        new Pose2d(1,2, new Rotation2d(0)), // Score : Red
-        new Pose2d(1,1,new Rotation2d(0))), // Score : Blue
+        new Pose2d(5.544,3.864, new Rotation2d(Math.PI)), // Score : Red
+        new Pose2d(5.464, 3.875,new Rotation2d(Math.PI))), // Score : Blue
 
       // Left Pose
       LEFT_START_POSE (
@@ -278,10 +276,21 @@ public final class Constants {
         new Pose2d(1,2, new Rotation2d(0)), // Score : Red
         new Pose2d(1,1,new Rotation2d(0))), // Score : Blue
 
-      TEST_POSES(
-        new Pose2d(3,4, new Rotation2d(0)),  //Red
-        new Pose2d(1,4, new Rotation2d(0))  //Blue
-      );
+      CORAL_STATION_RIGH_POSE(
+        new Pose2d(1.439,0.836, new Rotation2d(-312)), //Red
+        new Pose2d(1.439,0.836, new Rotation2d(Units.degreesToRadians(-312)))  //Blue
+      ),
+      
+      CORAL_STATION_RIGHT_APPROACH(
+        new Pose2d(3.308, 2.367, new Rotation2d(Units.degreesToRadians(70))), //Red
+        new Pose2d(3.308, 2.367, new Rotation2d(Units.degreesToRadians(70)))),  //Blue
+
+
+      SECOND_PIECE_SCORE(
+          new Pose2d(3.308, 2.367, new Rotation2d(Units.degreesToRadians(70))), //Red
+          new Pose2d(3.716,3.014, new Rotation2d(Units.degreesToRadians(-312))))  //Blue
+      
+      ;
 
       private Pose2d redSide;
       private Pose2d blueSide;
@@ -299,6 +308,23 @@ public final class Constants {
    
   }
 
+  public static class ClimbConstants {
+    public static final int CLIMB_ID = 14;
+    public static final int FUNNEL_ID = 12;
+    public static final int FUNNEL_DUTY_ID = 9;
 
+    public static final double CLIMB_UP = 240; //TODO
+    //replace with accurate values TODO
+    public static final double FUNNEL_UP = -33;
+    public static final double FUNNEL_DOWN = 0;
 
+    public static final double FUNNEL_P = 0.1;
+    public static final double FUNNEL_I = 0.00;
+    public static final double FUNNEL_D = 0.08;
+    public static final double CLIMB_P = 0.1;
+    
+    public static final double CLIMB_I = 0.0;
+    public static final double CLIMB_D = 0.1;
+
+  }
 }
